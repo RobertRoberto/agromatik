@@ -10,6 +10,8 @@ import {
   useMap,
 } from "@vis.gl/react-google-maps";
 
+import Button from "@/components/ui/Button";
+
 const INITIAL_RANCHO_POSITION = {
   lat: 19.705381,
   lng: -103.543137,
@@ -126,45 +128,40 @@ export default function RanchoMap() {
       apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
     >
       <div className="space-y-4">
-
-        {/* Encabezado */}
+        {/* ENCABEZADO */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold text-foreground">
               Ubicación del rancho
             </h2>
 
-            <p className="text-sm text-[var(--agromatik-text-secondary)]">
+            <p className="text-sm text-muted">
               Visualiza y ajusta la ubicación geográfica del rancho.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
-
-            <button
+            <Button
+              variant="secondary"
               onClick={goToRancho}
-              className="rounded-lg border border-[var(--agromatik-border)] bg-[var(--agromatik-card)] px-4 py-2 text-sm font-medium transition hover:bg-[var(--agromatik-green-light)]"
             >
               Volver al rancho
-            </button>
+            </Button>
 
-            <button
+            <Button
+              variant="primary"
               onClick={getMyLocation}
               disabled={isLocating}
-              className="rounded-lg bg-[var(--agromatik-green)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLocating
                 ? "Obteniendo ubicación..."
                 : "Mi ubicación"}
-            </button>
-
+            </Button>
           </div>
         </div>
 
-        {/* Mapa */}
+        {/* MAPA */}
         <div className="h-[600px] w-full overflow-hidden rounded-2xl">
-
           <Map
             defaultCenter={INITIAL_RANCHO_POSITION}
             defaultZoom={17}
@@ -177,8 +174,7 @@ export default function RanchoMap() {
             disableDoubleClickZoom={true}
             onDblclick={handleMapDoubleClick}
           >
-
-            {/* Marcador del rancho */}
+            {/* MARCADOR DEL RANCHO */}
             <AdvancedMarker
               position={ranchoPosition}
               draggable={true}
@@ -191,7 +187,7 @@ export default function RanchoMap() {
               />
             </AdvancedMarker>
 
-            {/* Centrado del mapa */}
+            {/* CENTRADO DEL MAPA */}
             {centerPosition && (
               <CenterMap
                 position={centerPosition}
@@ -199,29 +195,25 @@ export default function RanchoMap() {
               />
             )}
 
-            {/* Ubicación del usuario */}
+            {/* UBICACIÓN DEL USUARIO */}
             {userPosition && (
               <AdvancedMarker position={userPosition}>
                 <div className="relative">
-
                   <div className="absolute -left-2 -top-2 h-8 w-8 rounded-full bg-blue-500/20" />
 
                   <div className="relative h-4 w-4 rounded-full border-[3px] border-white bg-blue-500 shadow-lg" />
-
                 </div>
               </AdvancedMarker>
             )}
-
           </Map>
         </div>
 
-        {/* Error */}
+        {/* ERROR DE GEOLOCALIZACIÓN */}
         {locationError && (
-          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+          <div className="rounded-lg border border-danger bg-danger-soft px-4 py-3 text-sm text-danger">
             {locationError}
           </div>
         )}
-
       </div>
     </APIProvider>
   );

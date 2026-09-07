@@ -2,6 +2,9 @@
 
 import { X } from "lucide-react";
 
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+
 function getInputLabel(type) {
   switch (type) {
     case "rancho":
@@ -90,15 +93,15 @@ export default function StructureFormModal({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-md rounded-2xl border border-[var(--agromatik-border)] bg-[var(--agromatik-card)] shadow-xl">
-        <div className="flex items-center justify-between border-b border-[var(--agromatik-border)] px-5 py-4">
+      <div className="w-full max-w-md overflow-hidden rounded-2xl border border-border bg-surface text-foreground shadow-xl">
+        <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold text-foreground">
               {title}
             </h2>
 
             {modal.mode === "add" && (
-              <p className="mt-1 text-sm text-[var(--agromatik-text-secondary)]">
+              <p className="mt-1 text-sm text-muted">
                 Se agregará dentro de {modal.parentName}.
               </p>
             )}
@@ -107,18 +110,16 @@ export default function StructureFormModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 transition hover:bg-[var(--agromatik-green-light)]"
+            className="rounded-lg p-2 text-foreground transition-colors hover:bg-surface-hover"
+            aria-label="Cerrar"
           >
             <X size={20} />
           </button>
         </div>
 
         <div className="p-5">
-          <label className="mb-2 block text-sm font-medium">
-            {getInputLabel(modal.type)}
-          </label>
-
-          <input
+          <Input
+            label={getInputLabel(modal.type)}
             type={
               modal.type === "plantas"
                 ? "number"
@@ -139,29 +140,26 @@ export default function StructureFormModal({
                 ? 1
                 : undefined
             }
-            className="w-full rounded-lg border border-[var(--agromatik-border)] bg-[var(--agromatik-card)] px-3 py-2.5 outline-none transition focus:border-[var(--agromatik-green)]"
             autoFocus
           />
         </div>
 
-        <div className="flex justify-end gap-2 border-t border-[var(--agromatik-border)] px-5 py-4">
-          <button
-            type="button"
+        <div className="flex justify-end gap-2 border-t border-border px-5 py-4">
+          <Button
+            variant="secondary"
             onClick={onClose}
-            className="rounded-lg border border-[var(--agromatik-border)] px-4 py-2 text-sm font-medium transition hover:bg-[var(--agromatik-green-light)]"
           >
             Cancelar
-          </button>
+          </Button>
 
-          <button
-            type="button"
+          <Button
+            variant="primary"
             onClick={onSave}
-            className="rounded-lg bg-[var(--agromatik-green)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
           >
             {modal.mode === "add"
               ? "Guardar"
               : "Guardar cambios"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

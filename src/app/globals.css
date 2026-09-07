@@ -1,75 +1,128 @@
 @import "tailwindcss";
 
-/* =========================
-   TEMA CLARO - AGROMATIK
-========================= */
+/* =========================================================
+   AGROMATIK DESIGN SYSTEM
+   ========================================================= */
 
 :root {
-  --agromatik-green-dark: #00452c;
-  --agromatik-green: #0b6b45;
-  --agromatik-green-light: #ddebe0;
+  /* ---------- MARCA ---------- */
+  --primary: #0b6b45;
+  --primary-dark: #00452c;
 
-  --agromatik-background: #f7f7f4;
-  --agromatik-card: #ffffff;
+  /* Antes: #ddebe0 */
+  --primary-soft: #d2e7d8;
 
-  --agromatik-border: #e2e4de;
+  --accent: #e5004f;
+  --accent-soft: #fbe5ec;
 
-  --agromatik-text: #1f2a22;
-  --agromatik-text-secondary: #6b746d;
+  /* ---------- SUPERFICIES ---------- */
+  --background: #f7f7f4;
+  --surface: #ffffff;
 
-  --agromatik-accent: #e5004f;
-  --agromatik-accent-light: #fbe5ec;
+  /* Antes: #f1f3ef */
+  --surface-hover: #edf2ee;
 
-  --agromatik-warning: #f47a20;
+  /* ---------- TEXTO ---------- */
+  --text: #1f2a22;
+  --text-muted: #6b746d;
 
-  --background: var(--agromatik-background);
-  --foreground: var(--agromatik-text);
+  /* ---------- BORDES ---------- */
+  --border: #e2e4de;
+
+  /* ---------- ESTADOS ---------- */
+  --success: #15803d;
+  --success-soft: #dcfce7;
+
+  --warning: #f47a20;
+  --warning-soft: #ffedd5;
+
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+
+  --info: #2563eb;
+  --info-soft: #dbeafe;
 }
 
-
-/* =========================
-   TEMA OSCURO - AGROMATIK
-========================= */
+/* =========================================================
+   DARK MODE
+   ========================================================= */
 
 .dark {
-  --agromatik-green-dark: #00452c;
-  --agromatik-green: #14915f;
-  --agromatik-green-light: #183d30;
+  --primary: #14915f;
+  --primary-dark: #013d28;
+  --primary-soft: #183d30;
 
-  --agromatik-background: #111714;
-  --agromatik-card: #18201c;
+  --accent: #ff3b73;
+  --accent-soft: #3a1d28;
 
-  --agromatik-border: #2b3831;
+  --background: #111714;
+  --surface: #18201c;
+  --surface-hover: #202b25;
 
-  --agromatik-text: #edf4ef;
-  --agromatik-text-secondary: #a7b4ac;
+  --text: #edf4ef;
+  --text-muted: #a7b4ac;
 
-  --agromatik-accent: #ff3b73;
-  --agromatik-accent-light: #3a1d28;
+  --border: #2b3831;
 
-  --agromatik-warning: #ff9a4a;
+  --success: #4ade80;
+  --success-soft: #193b27;
 
-  --background: var(--agromatik-background);
-  --foreground: var(--agromatik-text);
+  --warning: #ff9a4a;
+  --warning-soft: #3b2b1d;
+
+  --danger: #f87171;
+  --danger-soft: #3b2020;
+
+  --info: #60a5fa;
+  --info-soft: #1e304d;
 }
 
-
-/* =========================
-   TAILWIND
-========================= */
+/* =========================================================
+   TAILWIND THEME
+   ========================================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Marca */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-soft: var(--primary-soft);
 
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  /* Superficies */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+
+  /* Texto */
+  --color-foreground: var(--text);
+  --color-muted: var(--text-muted);
+
+  /* Bordes */
+  --color-border: var(--border);
+
+  /* Estados */
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  /* Tipografía */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-
-/* =========================
-   ESTILOS GENERALES
-========================= */
+/* =========================================================
+   BASE
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -84,8 +137,14 @@ body {
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  color: var(--text);
+
+  font-family:
+    var(--font-geist-sans),
+    Arial,
+    Helvetica,
+    sans-serif;
+
   transition:
     background-color 0.25s ease,
     color 0.25s ease;

@@ -89,8 +89,8 @@ export default function TreeNode({
         className={[
           "group flex w-full items-center gap-2 rounded-lg py-2 pr-2 text-sm transition-colors",
           isSelected
-            ? "bg-[var(--agromatik-green-light)] font-medium text-[var(--agromatik-green)]"
-            : "hover:bg-[var(--agromatik-green-light)]",
+            ? "bg-primary-soft font-medium text-primary"
+            : "text-foreground hover:bg-surface-hover",
         ].join(" ")}
         style={{
           paddingLeft: `${8 + level * 14}px`,
@@ -104,6 +104,13 @@ export default function TreeNode({
             }
           }}
           className="flex h-5 w-5 shrink-0 items-center justify-center"
+          aria-label={
+            hasChildren
+              ? isOpen
+                ? `Contraer ${node.name}`
+                : `Expandir ${node.name}`
+              : undefined
+          }
         >
           {hasChildren ? (
             isOpen ? (
@@ -139,7 +146,7 @@ export default function TreeNode({
               menuIsOpen ? null : node.id
             );
           }}
-          className="rounded-md p-1 transition hover:bg-black/5"
+          className="rounded-md p-1 transition-colors hover:bg-surface-hover"
           aria-label={`Opciones de ${node.name}`}
         >
           <MoreHorizontal size={17} />
@@ -147,7 +154,7 @@ export default function TreeNode({
       </div>
 
       {menuIsOpen && (
-        <div className="absolute right-2 top-10 z-50 w-48 overflow-hidden rounded-xl border border-[var(--agromatik-border)] bg-[var(--agromatik-card)] shadow-lg">
+        <div className="absolute right-2 top-10 z-50 w-48 overflow-hidden rounded-xl border border-border bg-surface text-foreground shadow-lg">
           {node.type !== "plantas" && (
             <button
               type="button"
@@ -155,7 +162,7 @@ export default function TreeNode({
                 onAdd(node);
                 setOpenMenu(null);
               }}
-              className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm transition hover:bg-[var(--agromatik-green-light)]"
+              className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm transition-colors hover:bg-surface-hover"
             >
               <Plus size={16} />
 
@@ -169,13 +176,13 @@ export default function TreeNode({
               onEdit(node);
               setOpenMenu(null);
             }}
-            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm transition hover:bg-[var(--agromatik-green-light)]"
+            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm transition-colors hover:bg-surface-hover"
           >
             <Pencil size={16} />
             Editar
           </button>
 
-          <div className="border-t border-[var(--agromatik-border)]" />
+          <div className="border-t border-border" />
 
           <button
             type="button"
@@ -183,7 +190,7 @@ export default function TreeNode({
               onDelete(node);
               setOpenMenu(null);
             }}
-            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm text-red-600 transition hover:bg-red-50"
+            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm text-danger transition-colors hover:bg-danger-soft"
           >
             <Trash2 size={16} />
             Eliminar

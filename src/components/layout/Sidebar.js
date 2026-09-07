@@ -179,18 +179,21 @@ const menuItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+
   const getInitialOpenMenu = () => {
-  const activeGroup = menuItems.find((item) =>
-    item.children?.some((child) => pathname === child.href)
-  );
+    const activeGroup = menuItems.find((item) =>
+      item.children?.some((child) => pathname === child.href)
+    );
 
-  return activeGroup?.title || null;
-};
+    return activeGroup?.title || null;
+  };
 
-const [openMenu, setOpenMenu] = useState(getInitialOpenMenu);
+  const [openMenu, setOpenMenu] = useState(getInitialOpenMenu);
 
   const toggleMenu = (title) => {
-    setOpenMenu(openMenu === title ? null : title);
+    setOpenMenu((currentMenu) =>
+      currentMenu === title ? null : title
+    );
   };
 
   const isActive = (href) => {
@@ -198,71 +201,77 @@ const [openMenu, setOpenMenu] = useState(getInitialOpenMenu);
   };
 
   return (
-    <aside className="w-72 min-h-screen bg-[var(--agromatik-green-dark)] text-white flex flex-col px-4 py-5">
-      <div className="px-3 mb-8">
+    <aside className="flex min-h-screen w-72 flex-col bg-primary-dark px-4 py-5 text-white">
+      {/* LOGO */}
+      <div className="mb-8 px-3">
         <h1 className="text-2xl font-bold tracking-wide">
           AGROMATIK
         </h1>
 
-        <p className="text-sm text-white/65 mt-1">
+        <p className="mt-1 text-sm text-white/65">
           Gestión agrícola inteligente
         </p>
       </div>
 
+      {/* MENÚ */}
       <nav className="flex-1 space-y-1">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isOpen = openMenu === item.title;
 
+          /*
+           * ELEMENTOS SIN SUBMENÚ
+           * Ejemplo: Inicio y Perfil
+           */
           if (!item.children) {
+            const active = isActive(item.href);
+
             return (
               <Link
                 key={item.title}
                 href={item.href}
-                className={`
-                  w-full
-                  flex
-                  items-center
-                  gap-3
-                  px-3
-                  py-2.5
-                  rounded-lg
-                  text-sm
-                  font-medium
-                  transition-colors
-                  duration-200
-                  ${
-                    isActive(item.href)
-                      ? "bg-white/15 text-white"
-                      : "text-white/85 hover:bg-white/10 hover:text-white"
-                  }
-                `}
+                className={[
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5",
+                  "text-sm font-medium",
+                  "transition-colors duration-200",
+                  active
+                    ? "bg-white/15 text-white"
+                    : "text-white/85 hover:bg-white/10 hover:text-white",
+                ].join(" ")}
               >
-                <Icon size={20} strokeWidth={1.8} />
-                <span>{item.title}</span>
+                <Icon
+                  size={20}
+                  strokeWidth={1.8}
+                />
+
+                <span>
+                  {item.title}
+                </span>
               </Link>
             );
           }
 
+          /*
+           * ELEMENTOS CON SUBMENÚ
+           */
           return (
             <div key={item.title}>
               <button
-                onClick={() => toggleMenu(item.title)}
-                className="
-                  w-full
-                  flex
-                  items-center
-                  gap-3
-                  px-3
-                  py-2.5
-                  rounded-lg
-                  text-left
-                  transition-colors
-                  duration-200
-                  hover:bg-white/10
-                "
+                type="button"
+                onClick={() =>
+                  toggleMenu(item.title)
+                }
+                className={[
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5",
+                  "text-left",
+                  "transition-colors duration-200",
+                  "hover:bg-white/10",
+                ].join(" ")}
               >
-                <Icon size={20} strokeWidth={1.8} />
+                <Icon
+                  size={20}
+                  strokeWidth={1.8}
+                />
 
                 <span className="flex-1 text-sm font-medium">
                   {item.title}
@@ -276,39 +285,35 @@ const [openMenu, setOpenMenu] = useState(getInitialOpenMenu);
               </button>
 
               {isOpen && (
-                <div className="ml-5 mt-1 mb-2 pl-4 border-l border-white/15 space-y-1">
+                <div className="mb-2 ml-5 mt-1 space-y-1 border-l border-white/15 pl-4">
                   {item.children.map((child) => {
-                    const ChildIcon = child.icon;
-                    const active = isActive(child.href);
+                    const ChildIcon =
+                      child.icon;
+
+                    const active =
+                      isActive(child.href);
 
                     return (
                       <Link
                         key={child.title}
                         href={child.href}
-                        className={`
-                          w-full
-                          flex
-                          items-center
-                          gap-3
-                          px-3
-                          py-2
-                          rounded-lg
-                          text-sm
-                          transition-colors
-                          duration-200
-                          ${
-                            active
-                              ? "bg-white/15 text-white"
-                              : "text-white/70 hover:bg-white/10 hover:text-white"
-                          }
-                        `}
+                        className={[
+                          "flex w-full items-center gap-3 rounded-lg px-3 py-2",
+                          "text-sm",
+                          "transition-colors duration-200",
+                          active
+                            ? "bg-white/15 text-white"
+                            : "text-white/70 hover:bg-white/10 hover:text-white",
+                        ].join(" ")}
                       >
                         <ChildIcon
                           size={17}
                           strokeWidth={1.8}
                         />
 
-                        <span>{child.title}</span>
+                        <span>
+                          {child.title}
+                        </span>
                       </Link>
                     );
                   })}

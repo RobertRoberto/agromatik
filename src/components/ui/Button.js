@@ -10,19 +10,25 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-[var(--color-primary)] text-white hover:opacity-90",
+      "bg-primary text-white hover:opacity-90",
 
     secondary:
-      "border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary-soft)]",
+      "border border-border bg-surface text-foreground hover:bg-surface-hover",
 
     accent:
-      "bg-[var(--color-accent)] text-white hover:opacity-90",
+      "bg-accent text-white hover:opacity-90",
+
+    outline:
+      "border border-border bg-transparent text-foreground hover:bg-surface-hover",
 
     danger:
-      "bg-[var(--color-danger)] text-white hover:opacity-90",
+      "bg-danger text-white hover:opacity-90",
+
+    outlineDanger:
+      "border border-danger bg-transparent text-danger hover:bg-danger-soft",
 
     ghost:
-      "bg-transparent text-[var(--color-text)] hover:bg-[var(--color-primary-soft)]",
+      "bg-transparent text-foreground hover:bg-surface-hover",
   };
 
   return (

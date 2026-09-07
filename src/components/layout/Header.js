@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import {
   Search,
   Bell,
@@ -36,86 +37,43 @@ export default function Header() {
   };
 
   return (
-    <header
-      className="
-        h-20
-        bg-[var(--agromatik-card)]
-        border-b
-        border-[var(--agromatik-border)]
-        flex
-        items-center
-        justify-between
-        px-8
-      "
-    >
+    <header className="flex h-20 items-center justify-between border-b border-border bg-surface px-8">
       <div>
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-xl font-semibold text-foreground">
           Agromatik
         </h2>
 
-        <p className="text-sm text-[var(--agromatik-text-secondary)]">
+        <p className="text-sm text-muted">
           Gestión agrícola inteligente
         </p>
       </div>
 
       <div className="flex items-center gap-4">
-
-        <div
-          className="
-            hidden
-            lg:flex
-            items-center
-            gap-2
-            border
-            border-[var(--agromatik-border)]
-            rounded-lg
-            px-3
-            py-2
-            w-72
-            bg-[var(--agromatik-card)]
-          "
-        >
-          <Search size={18} />
+        <div className="hidden w-72 items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 lg:flex">
+          <Search
+            size={18}
+            className="text-muted"
+          />
 
           <input
             type="text"
             placeholder="Buscar..."
-            className="
-              w-full
-              bg-transparent
-              outline-none
-              text-sm
-            "
+            className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
           />
         </div>
 
         <button
-          className="
-            w-10
-            h-10
-            flex
-            items-center
-            justify-center
-            rounded-lg
-            hover:bg-[var(--agromatik-green-light)]
-            transition-colors
-          "
+          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-surface-hover"
+          aria-label="Notificaciones"
         >
           <Bell size={20} />
         </button>
 
         <button
+          type="button"
           onClick={toggleTheme}
-          className="
-            w-10
-            h-10
-            flex
-            items-center
-            justify-center
-            rounded-lg
-            hover:bg-[var(--agromatik-green-light)]
-            transition-colors
-          "
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-surface-hover"
           aria-label="Cambiar tema"
         >
           {darkMode ? (
@@ -126,37 +84,17 @@ export default function Header() {
         </button>
 
         <button
-          className="
-            flex
-            items-center
-            gap-2
-            rounded-lg
-            px-3
-            py-2
-            hover:bg-[var(--agromatik-green-light)]
-            transition-colors
-          "
+          type="button"
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-foreground transition-colors hover:bg-surface-hover"
         >
-          <div
-            className="
-                w-9
-                h-9
-                rounded-full
-                bg-[var(--agromatik-green)]
-                flex
-                items-center
-                justify-center
-                text-white
-            "
-          >
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-white">
             <User size={19} />
           </div>
 
-          <span className="hidden md:block text-sm font-medium">
+          <span className="hidden text-sm font-medium md:block">
             Usuario
           </span>
         </button>
-
       </div>
     </header>
   );

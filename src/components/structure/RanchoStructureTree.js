@@ -191,19 +191,19 @@ export default function RanchoStructureTree() {
 
   return (
     <>
-      <aside className="w-full rounded-2xl border border-[var(--agromatik-border)] bg-[var(--agromatik-card)] p-3">
-        <div className="mb-4 rounded-xl bg-[var(--agromatik-green-light)] p-3">
+      <aside className="w-full rounded-2xl border border-border bg-surface p-3">
+        <div className="mb-4 rounded-xl bg-primary-soft p-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--agromatik-green)] text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
               <House size={20} />
             </div>
 
             <div className="min-w-0">
-              <p className="text-xs text-[var(--agromatik-text-secondary)]">
+              <p className="text-xs text-muted">
                 Rancho seleccionado
               </p>
 
-              <p className="truncate font-semibold">
+              <p className="truncate font-semibold text-foreground">
                 {selectedRanchoName}
               </p>
             </div>
@@ -211,11 +211,11 @@ export default function RanchoStructureTree() {
         </div>
 
         <div className="mb-2 px-2">
-          <h2 className="text-sm font-semibold">
+          <h2 className="text-sm font-semibold text-foreground">
             Estructura
           </h2>
 
-          <p className="mt-1 text-xs text-[var(--agromatik-text-secondary)]">
+          <p className="mt-1 text-xs text-muted">
             Organización física y productiva
           </p>
         </div>

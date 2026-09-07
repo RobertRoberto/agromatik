@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 
 import Sidebar from "@/components/layout/Sidebar";
@@ -25,20 +26,16 @@ export default function RootLayout({ children }) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex">
-
+      <body className="flex min-h-screen bg-background text-foreground">
         <Sidebar />
 
-        <div className="flex-1 min-w-0 flex flex-col">
-
+        <div className="flex min-w-0 flex-1 flex-col">
           <Header />
 
-          <main className="flex-1 bg-[var(--agromatik-background)]">
+          <main className="flex-1 bg-background">
             {children}
           </main>
-
         </div>
-
       </body>
     </html>
   );
